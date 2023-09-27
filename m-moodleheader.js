@@ -6,30 +6,16 @@
 
 $().ready(function(){
 
-// ===== Addition for 'Your Feedback' button to all Midwifery modules (25/02/23 JH)	=====
-	var courseTitle = $("h1:first").text();
-	//console.log(courseTitle);
-	if(courseTitle.includes("MIDW1") || courseTitle.includes("MIDW2") || courseTitle.includes("MIDW3")) {
-		// Append the 'Your Feeback' button to Midwifery modules
-		$("#menuBar").after("<div class='p-2 bd-highlight mx-auto col-9'><a class='btn btn-dark btn-block' href='#' id='feedbackBtn' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='Your feedback' aria-label='Your feedback'><i class='fa fa-comments' aria-hidden='true'></i> <br /> Your Feedback </a></div>");
-		// Create a modal to attach to the 'Your Feedback' button in Midwifery modules
-		$("#feedbackBtn").after("<div class='modal fade' id='feedbackModal' role='dialog' tabindex='-1'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><h4 class='modal-title'>Your Feedback</h4><button type='button' class='close' data-dismiss='modal'>&times;</button></div><div class='modal-body'><!--<h5>Responding to student feedback</h5>--> <img src='https://moodle.nottingham.ac.uk/draftfile.php/721/user/draft/317545982/Screenshot%202023-02-01%20at%2011.58.59.png' alt='UoN - You said, we did image' class='rounded mx-auto d-block' width='240' height='60' /><p>See how the School responded to student feedback received from all mechanisms as outlined below including feedback from the National Student Survey (NSS). All links open in a new tab.</p><h6>Student Evaluation of Module (SEM)</h6><p>See how the School responded to feedback from previous students on what they liked or did not like about your module.</p><p><a href='https://moodle.nottingham.ac.uk/course/view.php?id=140300' target='_blank'>https://moodle.nottingham.ac.uk/course/view.php?id=140300</a></p><h6>Learning Community Forum (LCF)</h6><p>Meeting dates when elected course representatives escalate to academic staff any concerns students may have about their courses. You can access discussion notes from the meetings.</p><p><a href='https://moodle.nottingham.ac.uk/course/view.php?id=98211' target='_blank'>https://moodle.nottingham.ac.uk/course/view.php?id=98211</a></p><h6>External Examiners Reports</h6><p>External examiners provide an independent review of assessments, the reports outline any suggested changes and highlight good practice.</p><p><a href='https://moodle.nottingham.ac.uk/course/view.php?id=98211' target='_blank'>https://moodle.nottingham.ac.uk/course/view.php?id=98211</a></p><h6>Student Evaluation of Practice Learning (SEPL)</h6><p>Student feedback on their practice learning experience is discussed with relevant practice staff through the School Practice Learning Team and ultimately contribute to the continuous improvement of the learning experience. You can access the SEPL action plans on ARCPOW.</p><p><a href='https://workspace.nottingham.ac.uk/display/healthsciencesstudent/ARCPOW' target='_blank'>https://workspace.nottingham.ac.uk/display/healthsciencesstudent/ARCPOW</a></p><div class='modal-footer'></div></div></div></div></div>");
-	}
+
 
 // ===== START: Small UI tweaks =====
 
 	// Remove 'General' as the first heading
 	$("h3.sectionname:contains('General')").hide();
-	// Remove the default 'Your progress' icon at the top of the course page
-	$("#completionprogressid").hide();
 	// Add things at the end of each section
 	$(".section ul.section").not(':first').append('<li class="activity"><div class="sectionFooter"><a href="#" title="Return to top of the course" class="btn btn-outline-primary btn-sm returnTopBtn"><i class="fa fa-chevron-circle-up"></i> Return to top of the course</a></div></li>');
-	// Create a container for title to appear in on scrolling down
-	$(".navbar-brand").after("<div id='course-title'></div>");
-	// Create a course site tour icon next to editing button
-	$("#page-navbar").before("<div id='course-tour' class='edit-button pull-right'><a href='#' id='tourBtn' title='Launch site tour' type='button' class='btn btn-secondary' style='min-width:55px;'><i class='fa fa-map-signs' aria-hidden='true'></i></a></div>");
-	// Create a modal for the Upcoming Events section
-	$("#upcomingBtn").after("<div class='modal fade' id='upcomingModal' role='dialog'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><h4 class='modal-title'>Upcoming events</h4><button type='button' class='close' data-dismiss='modal'>&times;</button></div><div class='modal-body'><p>How would you like to view your upcoming events?</p><p>You can choose to view them for this course only or for all your courses (opens in a new tab).</p><div class='modal-footer'><button type='button' class='btn btn-primary' id='upcomingCourse' data-dismiss='modal'>View for this course only</button><button type='button' class='btn btn-primary' id='upcomingAll' data-dismiss='modal'>View for all my courses </button></div></div></div></div></div>");
+
+
 	// Create a search section
 	//$("#searchSection").prepend("<h5><label for='searchbox' class='control-label'>Search this course:</label></h5><div class='row justify-content-center'><input class='form-control col-sm-11' id='searchbox' placeholder='Enter a keyword to find your resources...' type='text' /><button type='button' class='btn btn-outline-primary' id='clearBtn'><i class='fa fa-times' aria-hidden='true'></i> Clear</button></div><div class='row justify-content-center'><span id='counter'></span></div>");
 	$("#searchSection").prepend("<h5><label for='searchbox' class='control-label'>Search this course:</label></h5><div class='input-group mb-3'><input type='text' id='searchbox' class='form-control' placeholder='Enter a keyword to find your resources...' aria-label='Search this course' aria-describedby='clearBtn'><div class='input-group-append'><button class='btn btn-outline-secondary' type='button' id='clearBtn'>&times; Clear</button></div></div><div class='row justify-content-center'><span id='counter'></span></div>");
@@ -98,46 +84,13 @@ $().ready(function(){
 	});
 
 
-	/* RUBRICS.... George Gadd
+	/* RUBRICS
 	$(".activity:contains('.rbc'), .activityinstance:contains('.rbc'), .activityinstance:contains('ubric')").append("<span class='activityType'>RUBRIC</span>");
 	...*/
 
 	// END: Add a custom 'tag' for the type of activity following its name
 
-	// START: Generate duplicate turn editing on button
-	var edit_address = "";
-	edit_address = $("a.btn[title='Turn editing on']").attr('href');
 
-	if (edit_address != undefined) {
-		var new_edit_link = '<div id="turn_edit_on_btn2" class="edit-button" style="display:inline-block;z-index:1000;"><a href="'+edit_address+'" class="btn btn-secondary" title="Turn editing on" style="background-color:#B32B76;margin-left:10px;"><i class="fa-edit fa fa-fw fa-2x"></i></a><div>';
-		//$('.usermenu').before( new_edit_link );
-		$("li div.usermenu").parent().after('<li>'+new_edit_link+'</li>');
-	}
-	else {
-		var edit_off_address = $("a.btn[title='Turn editing off']").attr('href');
-		var new_edit_off_link = '<div id="turn_edit_on_btn2" class="edit-button" style="display:inline-block;z-index:1000;"><a href="'+edit_off_address+'" class="btn btn-secondary btn-active" title="Turn editing off" style="background-color:#B0B0B0;margin-left:10px;"><i class="fa-edit fa fa-fw fa-2x"></i></a><div>';
-		//$('.usermenu').before( new_edit_off_link );
-		$("li div.usermenu").parent().after('<li>'+new_edit_off_link+'</li>');
-	}
-
-	// Initially hide the new button
-	$('#turn_edit_on_btn2').hide();
-	$('#course-title').hide();
-
-	// Show turn editing on button in header bar when page scrolls (hide when scrolls back)
-	$(document).scroll(function() {
-		var y = $(this).scrollTop();
-		if (y > 150) {
-			$('#turn_edit_on_btn2').fadeIn();
-			$('#course-title').fadeIn().html('<div id="courseTitle">' + courseTitle + '</h1></div>');
-		}
-		else {
-			$('#turn_edit_on_btn2').fadeOut();
-			$('#course-title').fadeOut();
-		}
-	});
-
-	// END: Generate duplicate turn editing on button
 
 // ===== END: Small UI tweaks =====
 
