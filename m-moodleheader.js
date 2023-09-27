@@ -1,15 +1,35 @@
 /******************************************************************************************************/
-/* 	File: 		m-moodleheader.js
+/* 	File: 		hs-custommoodle-2223.js
 /*	Type: 		Custom JavaScript
 
 /******************************************************************************************************/
 
 $().ready(function(){
 
+// ===== Addition for 'Your Feedback' button to all Midwifery modules (25/02/23 JH)	=====
+	var courseTitle = $("h1:first").text();
+	//console.log(courseTitle);
+	if(courseTitle.includes("MIDW1") || courseTitle.includes("MIDW2") || courseTitle.includes("MIDW3")) {
+		// Append the 'Your Feeback' button to Midwifery modules
+		$("#menuBar").after("<div class='p-2 bd-highlight mx-auto col-9'><a class='btn btn-dark btn-block' href='#' id='feedbackBtn' data-toggle='tooltip' data-placement='bottom' title='' data-original-title='Your feedback' aria-label='Your feedback'><i class='fa fa-comments' aria-hidden='true'></i> <br /> Your Feedback </a></div>");
+		// Create a modal to attach to the 'Your Feedback' button in Midwifery modules
+		$("#feedbackBtn").after("<div class='modal fade' id='feedbackModal' role='dialog' tabindex='-1'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><h4 class='modal-title'>Your Feedback</h4><button type='button' class='close' data-dismiss='modal'>&times;</button></div><div class='modal-body'><!--<h5>Responding to student feedback</h5>--> <img src='https://moodle.nottingham.ac.uk/draftfile.php/721/user/draft/317545982/Screenshot%202023-02-01%20at%2011.58.59.png' alt='UoN - You said, we did image' class='rounded mx-auto d-block' width='240' height='60' /><p>See how the School responded to student feedback received from all mechanisms as outlined below including feedback from the National Student Survey (NSS). All links open in a new tab.</p><h6>Student Evaluation of Module (SEM)</h6><p>See how the School responded to feedback from previous students on what they liked or did not like about your module.</p><p><a href='https://moodle.nottingham.ac.uk/course/view.php?id=140300' target='_blank'>https://moodle.nottingham.ac.uk/course/view.php?id=140300</a></p><h6>Learning Community Forum (LCF)</h6><p>Meeting dates when elected course representatives escalate to academic staff any concerns students may have about their courses. You can access discussion notes from the meetings.</p><p><a href='https://moodle.nottingham.ac.uk/course/view.php?id=98211' target='_blank'>https://moodle.nottingham.ac.uk/course/view.php?id=98211</a></p><h6>External Examiners Reports</h6><p>External examiners provide an independent review of assessments, the reports outline any suggested changes and highlight good practice.</p><p><a href='https://moodle.nottingham.ac.uk/course/view.php?id=98211' target='_blank'>https://moodle.nottingham.ac.uk/course/view.php?id=98211</a></p><h6>Student Evaluation of Practice Learning (SEPL)</h6><p>Student feedback on their practice learning experience is discussed with relevant practice staff through the School Practice Learning Team and ultimately contribute to the continuous improvement of the learning experience. You can access the SEPL action plans on ARCPOW.</p><p><a href='https://workspace.nottingham.ac.uk/display/healthsciencesstudent/ARCPOW' target='_blank'>https://workspace.nottingham.ac.uk/display/healthsciencesstudent/ARCPOW</a></p><div class='modal-footer'></div></div></div></div></div>");
+	}
+
 // ===== START: Small UI tweaks =====
 
+	// Remove 'General' as the first heading
+	$("h3.sectionname:contains('General')").hide();
+	// Remove the default 'Your progress' icon at the top of the course page
+	$("#completionprogressid").hide();
 	// Add things at the end of each section
 	$(".section ul.section").not(':first').append('<li class="activity"><div class="sectionFooter"><a href="#" title="Return to top of the course" class="btn btn-outline-primary btn-sm returnTopBtn"><i class="fa fa-chevron-circle-up"></i> Return to top of the course</a></div></li>');
+	// Create a container for title to appear in on scrolling down
+	$(".navbar-brand").after("<div id='course-title'></div>");
+	// Create a course site tour icon next to editing button
+	$("#page-navbar").before("<div id='course-tour' class='edit-button pull-right'><a href='#' id='tourBtn' title='Launch site tour' type='button' class='btn btn-secondary' style='min-width:55px;'><i class='fa fa-map-signs' aria-hidden='true'></i></a></div>");
+	// Create a modal for the Upcoming Events section
+	$("#upcomingBtn").after("<div class='modal fade' id='upcomingModal' role='dialog'><div class='modal-dialog'><div class='modal-content'><div class='modal-header'><h4 class='modal-title'>Upcoming events</h4><button type='button' class='close' data-dismiss='modal'>&times;</button></div><div class='modal-body'><p>How would you like to view your upcoming events?</p><p>You can choose to view them for this course only or for all your courses (opens in a new tab).</p><div class='modal-footer'><button type='button' class='btn btn-primary' id='upcomingCourse' data-dismiss='modal'>View for this course only</button><button type='button' class='btn btn-primary' id='upcomingAll' data-dismiss='modal'>View for all my courses </button></div></div></div></div></div>");
 	// Create a search section
 	//$("#searchSection").prepend("<h5><label for='searchbox' class='control-label'>Search this course:</label></h5><div class='row justify-content-center'><input class='form-control col-sm-11' id='searchbox' placeholder='Enter a keyword to find your resources...' type='text' /><button type='button' class='btn btn-outline-primary' id='clearBtn'><i class='fa fa-times' aria-hidden='true'></i> Clear</button></div><div class='row justify-content-center'><span id='counter'></span></div>");
 	$("#searchSection").prepend("<h5><label for='searchbox' class='control-label'>Search this course:</label></h5><div class='input-group mb-3'><input type='text' id='searchbox' class='form-control' placeholder='Enter a keyword to find your resources...' aria-label='Search this course' aria-describedby='clearBtn'><div class='input-group-append'><button class='btn btn-outline-secondary' type='button' id='clearBtn'>&times; Clear</button></div></div><div class='row justify-content-center'><span id='counter'></span></div>");
@@ -78,7 +98,7 @@ $().ready(function(){
 	});
 
 
-	/* RUBRICS
+	/* RUBRICS.... George Gadd
 	$(".activity:contains('.rbc'), .activityinstance:contains('.rbc'), .activityinstance:contains('ubric')").append("<span class='activityType'>RUBRIC</span>");
 	...*/
 
@@ -99,6 +119,25 @@ $().ready(function(){
 		//$('.usermenu').before( new_edit_off_link );
 		$("li div.usermenu").parent().after('<li>'+new_edit_off_link+'</li>');
 	}
+
+	// Initially hide the new button
+	$('#turn_edit_on_btn2').hide();
+	$('#course-title').hide();
+
+	// Show turn editing on button in header bar when page scrolls (hide when scrolls back)
+	$(document).scroll(function() {
+		var y = $(this).scrollTop();
+		if (y > 150) {
+			$('#turn_edit_on_btn2').fadeIn();
+			$('#course-title').fadeIn().html('<div id="courseTitle">' + courseTitle + '</h1></div>');
+		}
+		else {
+			$('#turn_edit_on_btn2').fadeOut();
+			$('#course-title').fadeOut();
+		}
+	});
+
+	// END: Generate duplicate turn editing on button
 
 // ===== END: Small UI tweaks =====
 
@@ -191,6 +230,588 @@ item.style.display = item.textContent.includes(liveSearch.target.value)
 */
 
 // ===== END: Create and display search function =====
+
+
+// ===== START: Events to open and close sections/topics =====
+
+// Actions for clicking on the Assessment button
+$("#assessmentBtn").click(function(){
+	// Open only the Assessment section
+	$('.sectionhead:contains("Assessment")').next().addClass("sectionopen");
+	$('.sectionhead:contains("Assessment")').next().next().addClass("sectionopen");
+	$('.sectionhead:contains("Assessment") span').removeClass("toggle_closed").addClass("toggle_open");
+
+		$('html, body').animate({
+			scrollTop: $('.sectionhead:contains("Assessment")').offset().top
+		}, 800);
+});
+
+// Actions for clicking on the Your Feedback button
+$("#feedbackBtn").click(function(){
+	$("#feedbackModal").modal();
+});
+
+// Actions for clicking on the Upcoming button
+$("#upcomingBtn").click(function(){
+	$("#upcomingModal").modal();
+});
+
+$("#upcomingCourse").click(function(){
+	// Open the calendar for the specific course
+	let currentURL = window.location.href;
+	var courseID = currentURL.split('id=')[1].replace(/\D/g, '');
+		//console.log("Course ID is: " + currentURL.split('id=')[1].replace(/\D/g, ''));
+		//console.log('https://moodle.nottingham.ac.uk/calendar/view.php?view=month&course=' + courseID);
+	// Redirect to calendar with the course code in the URL
+	window.location.href = 'https://moodle.nottingham.ac.uk/calendar/view.php?view=month&course=' + courseID;
+});
+
+$("#upcomingAll").click(function(){
+	// Open the calendar for all courses in month view
+	let url = 'https://moodle.nottingham.ac.uk/calendar/view.php?view=month';
+	window.open(url, '_blank').focus();
+});
+
+function openAllSections() {
+	// Open all collapsed topic sections
+	$("[id^=toggledsection-]").addClass("sectionopen");
+}
+
+function closeAllSections() {
+	// Close all collapsed topic sections
+	$("[id^=toggledsection-]").removeClass("sectionopen");
+}
+
+function hideTourBtn() {
+	$("#tourBtn").css("display", "none !important");
+}
+
+// ===== START: Events to open and close sections/topics =====
+
+
+// ===== START: Create and display progress charts =====
+/*
+// Declare global variables
+var numItems, numCheckedItems, percentComplete, countChecked, countUnchecked;
+var uncheckedLectureItems, uncheckedSeminarItems, uncheckedOnlineActivityItems, uncheckedPracticalItems, uncheckedWorkshopItems;
+var checkedLectureItems, checkedSeminarItems, checkedOnlineActivityItems, checkedPracticalItems, checkedWorkshopItems;
+var totalLectureItems, totalSeminarItems, totalOnlineActivityItems, totalPracticalItems, totalWorkshopItems;
+var completeLectures, completeSeminars, completeOAs, completePracticals, completeWorkshops;
+
+function countElements() {
+	// Count the amount of checked and unchecked items in the course
+	countChecked = $("img[alt*='Completed']").filter(function() { return $(this); }).length;
+	countUnchecked = $("img[alt*='Not completed']").filter(function() { return $(this); }).length;
+
+	// Count the amount of checked and unchecked for each type of activity in the course
+	uncheckedLectureItems = $("img[alt*='Not completed'][alt*='[L]']").filter(function() { return $(this); }).length;
+	uncheckedSeminarItems = $("img[alt*='Not completed'][alt*='[S]']").filter(function() { return $(this); }).length;
+	uncheckedOnlineActivityItems = $("img[alt*='Not completed'][alt*='[OA]']").filter(function() { return $(this); }).length;
+
+	uncheckedOnlineActivityItems = $(".activity:contains('ONLINE ACTIVITY') img[alt*='Not completed']").filter(function() { return $(this); }).length;
+
+	checkedOnlineActivityItems = $(".activity:contains('ONLINE ACTIVITY') img[alt*='Completed']").filter(function() { return $(this); }).length;
+
+	uncheckedPracticalItems = $("img[alt*='Not completed'][alt*='[P]']").filter(function() { return $(this); }).length;
+	uncheckedWorkshopItems = $("img[alt*='Not completed'][alt*='[W]']").filter(function() { return $(this); }).length;
+	checkedLectureItems = $("img[alt*='Completed'][alt*='[L]']").filter(function() { return $(this); }).length;
+	checkedSeminarItems = $("img[alt*='Completed'][alt*='[S]']").filter(function() { return $(this); }).length;
+	checkedOnlineActivityItems = $("img[alt*='Completed'][alt*='[OA]']").filter(function() { return $(this); }).length;
+	checkedPracticalItems = $("img[alt*='Completed'][alt*='[P]']").filter(function() { return $(this); }).length;
+	checkedWorkshopItems = $("img[alt*='Completed'][alt*='[W]']").filter(function() { return $(this); }).length;
+
+	totalLectureItems = checkedLectureItems + uncheckedLectureItems;
+	totalSeminarItems = checkedSeminarItems + uncheckedSeminarItems;
+	totalOnlineActivityItems = checkedOnlineActivityItems + uncheckedOnlineActivityItems;
+	totalPracticalItems = checkedPracticalItems + uncheckedPracticalItems;
+	totalWorkshopItems = checkedWorkshopItems + uncheckedWorkshopItems;
+
+	completeLectures = Math.round((checkedLectureItems/totalLectureItems) * 100);
+	completeSeminars = Math.round((checkedSeminarItems/totalSeminarItems) * 100);
+	completeOAs = Math.round((checkedOnlineActivityItems/totalOnlineActivityItems) * 100);
+	completePracticals = Math.round((checkedPracticalItems/totalPracticalItems) * 100);
+	completeWorkshops = Math.round((checkedWorkshopItems/totalWorkshopItems) * 100);
+
+	console.log("Checked Lectures: " + checkedLectureItems + ", Unchecked Lectures: " + uncheckedLectureItems + ", Total: " + totalLectureItems + ", Completion: " + completeLectures + "%" );
+	console.log("Checked Seminars: " + checkedSeminarItems + ", Unchecked Seminars: " + uncheckedSeminarItems + ", Total: " + totalSeminarItems + ", Completion: " + completeSeminars + "%");
+	console.log("Checked OAs: " + checkedOnlineActivityItems + ", Unchecked OAs: " + uncheckedOnlineActivityItems + ", Total: " + totalOnlineActivityItems + ", Completion: " + completeOAs + "%");
+	console.log("Checked Practicals: " + checkedPracticalItems + ", Unchecked Practicals: " + uncheckedPracticalItems + ", Total: " + totalPracticalItems + ", Completion: " + completePracticals + "%");
+	console.log("Checked Workshops: " + checkedWorkshopItems + ", Unchecked Workshops: " + uncheckedWorkshopItems + ", Total: " + totalWorkshopItems + ", Completion: " + completeWorkshops + "%");
+
+	// Display output for count of each type of activity
+	console.log("Blend of learning items present:  [Lecture, " + totalLectureItems + "], [Seminar, " + totalSeminarItems + "], [Guided Independent Study, " + totalOnlineActivityItems + "], [Practical, " + totalPracticalItems + "], [Workshop, " + totalWorkshopItems + "]" );
+}
+
+function updateProgress() {
+	'use strict';
+
+	// Display information only if module completion data exists...
+	if ( ($("input[name='completionstate']").length > 0) || ($(".autocompletion").length > 0) ) {
+		// Target all completion available
+		numItems = ($("input[name='completionstate']").length) + ($(".autocompletion").length);
+		numCheckedItems = ($("input[name='completionstate'][value='0']").length) + ($("img[src*='completion-auto-y']").length);
+
+		// Check values to avoid a NaN percentage when 0/0
+		if ((numCheckedItems !== 0) && (numItems !== 0)) {
+			percentComplete = numCheckedItems/numItems;
+			//percentComplete = (numCheckedItems/numItems)*100;
+		}
+		else {
+			percentComplete = 0;
+		}
+		countElements();
+		displayProgress();
+		$("#lectureProgress").css('width', completeLectures+"%");
+		$("#seminarProgress").css('width', completeSeminars+"%");
+		$("#OnlineActivityProgress").css('width', completeOAs+"%");
+		$("#practicalProgress").css('width', completePracticals+"%");
+		$("#workshopProgress").css('width', completeWorkshops+"%");
+	}
+
+	else {
+		// Display message to say that no module completion data exists
+		$("#progressChart").html("<p>Progress cannot be determined as there are currently no activities with module completion tracking enabled.</p>");
+	}
+}
+
+updateProgress();
+
+$("button").click(function() {
+	'use strict';
+	setTimeout(function() {
+		updateProgress();
+	}, 900); //wait 0.9 second before displaying
+});
+
+
+function displayProgress() {
+
+	if ((document.location.href.indexOf('&notifyeditingon=1') > -1 )) {
+		$("#progressChart").replaceWith('<div class="alert alert-info"><em><strong>Your Progress</strong> information is not available in editing mode.</em></div>');
+	}
+	else {
+		$("#progressChart").html("<div class='container'><div class='row'><div class='col-md-12 p-4'><h5>Your progress:</h5><p>You have completed " + numCheckedItems + " of " + numItems + " learning activities. <a href='#' data-toggle='modal' data-target='#yourProgressModal'><span class='text-info fa fa-question-circle'></span></a></p><div class='progress'><div id='lectureProgress' class='progress-bar bg-warning' role='progressbar' aria-valuenow='" + completeLectures + "' style='width: 0%;' aria-valuemin='0' aria-valuemax='100'></div></div><div class='small'><span class='sr-only'>Lecture progress:</span> <strong>" + completeLectures + "</strong>% lectures complete (" + checkedLectureItems + "/" + totalLectureItems + ")</div><div class='progress'><div id='seminarProgress' class='progress-bar bg-info' role='progressbar' aria-valuenow='" + completeSeminars + "' style='width: 0%;' aria-valuemin='0' aria-valuemax='100'></div></div><div class='small'><span class='sr-only'>Seminar progress:</span> <strong>" + completeSeminars + "</strong>% seminars complete (" + checkedSeminarItems + "/" + totalSeminarItems + ")</div><div class='progress'><div id='OnlineActivityProgress' class='progress-bar bg-success' role='progressbar' aria-valuenow='" + completeOAs + "' style='width: 0%;' aria-valuemin='0' aria-valuemax='100'></div></div><div class='small'><span class='sr-only'>OA progress:</span> <strong>" + completeOAs + "</strong>% guided independent study complete (" + checkedOnlineActivityItems + "/" + totalOnlineActivityItems + ")</div><div class='progress'><div id='practicalProgress' class='progress-bar bg-primary' role='progressbar' aria-valuenow='" + completePracticals + "' style='width: 0%;' aria-valuemin='0' aria-valuemax='100'></div></div><div class='small'><span class='sr-only'>Practical progress:</span> <strong>" + completePracticals + "</strong>% practicals complete (" + checkedPracticalItems + "/" + totalPracticalItems + ")</div><div class='progress'><div id='workshopProgress' class='progress-bar bg-dark' role='progressbar' aria-valuenow='" + completeWorkshops + "' style='width: 0%;' aria-valuemin='0' aria-valuemax='100'></div></div><div class='small'><span class='sr-only'>Workshop progress:</span> <strong>" + completeWorkshops + "</strong>% workshops complete (" + checkedWorkshopItems + "/" + totalWorkshopItems + ")</div><div class='modal fade' id='yourProgressModal' style='color: #4a4a4a;' tabindex='-1' role='dialog' aria-labelledby='yourProgressModalLabel'><div class='modal-dialog' role='document'><div class='modal-content'><div class='modal-header'><h5 class='modal-title' id='yourProgressModalLabel'>Your Progress</h5><button type='button' class='close' data-dismiss='modal' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div><div class='modal-body'><p>A tick next to an activity name is used to indicate when the activity is complete. This contributes to a simple method of tracking your progress through the module.</p><div class='table-responsive'><table class='table table-condensed table-bordered'><tr><td width='30%'><img src='https://www.nottingham.ac.uk/healthsciences/app-resources/vle-resources/images/auto-complete.png'><i class='fa fa-long-arrow-right' aria-hidden='true'></i><img src='https://www.nottingham.ac.uk/healthsciences/app-resources/vle-resources/images/auto-complete-marked.png'><i class='fa fa-magic' aria-hidden='true'></i></td><td>If a blank dotted box is shown, a tick will appear automatically when you have completed the activity according to conditions set by the module team.</td></tr><tr><td width='30%'><img src='https://www.nottingham.ac.uk/healthsciences/app-resources/vle-resources/images/manual-complete.png'><i class='fa fa-long-arrow-right' aria-hidden='true'></i><img src='https://www.nottingham.ac.uk/healthsciences/app-resources/vle-resources/images/manual-complete-marked.png'><i class='fa fa-hand-o-up' aria-hidden='true'></i></td><td>If a blank solid box is shown, you can click it to tick the box when you have completed the activity (clicking it again removes the tick if you change your mind).</td></tr></table></div></div></div></div></div>");
+	}
+}
+*/
+// ===== END: Create and display progress charts =====
+
+
+	/* START activity feedback links
+	$(".activity:contains('Learning Activity Feedback')").each(function() {
+				$(this).find('img:first').replaceWith('<span class="fa-stack fa-lg psr-feedback-icon-color" aria-hidden="true"> <i class="fa fa-certificate fa-stack-2x"></i> <i class="fa fa-comments-o fa-1x fa-stack-1x fa-inverse"></i> </span>');
+	});
+	// END activity feedback links */
+
+	/* START badges / labels
+	$('.provided').html('Provided <i class="fa fa-check-square-o"></i>');
+	$('.provided').addClass('psr-notification-badge');
+
+	$('.not_provided').html('Not Provided <i class="fa fa-times-circle-o"></i>');
+	$('.not_provided').addClass('psr-notification-badge');
+
+	$('.video').html('Video Resources <i class="fa fa-film"></i>');
+	$('.video').addClass('psr-notification-badge');
+
+	$('.medscape').html('Medscape Resources <i class="fa fa-caret-square-o-left fa-flip-horizontal"></i>');
+	$('.medscape').addClass('psr-notification-badge');
+
+	$('.compulsory').html('<span class="compulsory2">Compulsory <i class="fa fa-exclamation-triangle" aria-hidden="true"></i></span>');
+	$('.compulsory').addClass('psr-notification-badge');
+
+	// END badges / labels */
+
+
+	// ===== START: Display a website tour of course site =====
+	/* Based on tour implementation provided by Shepherd.js 		*/
+	/* DOCS: https://shepherdjs.dev/docs/tutorial-02-usage.html */
+
+	const tour = new Shepherd.Tour({
+	  useModalOverlay: true,
+	  defaultStepOptions: {
+	    classes: 'shadow-md bg-purple-dark',
+			cancelIcon: {
+				enabled: true
+			},
+	  }
+	});
+
+	tour.addStep({
+	  id: 'page-width',
+	  text: "All course content is incorporated into menu buttons or topics.",
+		title: "<span class='circle'>1</span> Full Page Display",
+	  attachTo: {
+	    element: '.content',
+	    on: 'top'
+	  },
+	  classes: 'example-step-extra-class',
+	  buttons: [
+			{
+	      text: "<i class='fa fa-angle-left' aria-hidden='true'></i> Back",
+				disabled: true,
+	      action: tour.back
+	    },
+	    {
+	      text: "<i class='fa fa-angle-right' aria-hidden='true'></i> Next",
+	      action: tour.next
+	    }
+	  ],
+		when: {
+			show() {
+				const currentStepElement = tour.currentStep.el;
+				const footer = currentStepElement.querySelector('.shepherd-footer');
+				const progress = document.createElement('span');
+				progress.className = 'shepherd-progress';
+				progress.innerText = `${tour.steps.indexOf(tour.currentStep) + 1} of ${tour.steps.length}`;
+				footer.insertBefore(progress, currentStepElement.querySelector('.shepherd-button:last-child'));
+			}
+		},
+		scrollTo: true
+	});
+
+	tour.addStep({
+	  id: 'menubar-full',
+	  text: "The course menu buttons consistently offer a focal point of information and support for your studies.",
+		title: "<span class='circle'>2</span> Course Menu Bar",
+	  attachTo: {
+	    element: '#menuBar',
+	    on: 'bottom'
+	  },
+	  classes: 'example-step-extra-class',
+	  buttons: [
+			{
+	      text: "<i class='fa fa-angle-left' aria-hidden='true'></i> Back",
+	      action: tour.back
+	    },
+	    {
+	      text: "<i class='fa fa-angle-right' aria-hidden='true'></i> Next",
+	      action: tour.next
+	    }
+	  ],
+		when: {
+			show() {
+				const currentStepElement = tour.currentStep.el;
+				const footer = currentStepElement.querySelector('.shepherd-footer');
+				const progress = document.createElement('span');
+				progress.className = 'shepherd-progress';
+				progress.innerText = `${tour.steps.indexOf(tour.currentStep) + 1} of ${tour.steps.length}`;
+				footer.insertBefore(progress, currentStepElement.querySelector('.shepherd-button:last-child'));
+			}
+		},
+		scrollTo: true
+	});
+
+	tour.addStep({
+	  id: 'menubar-announcements',
+	  text: "This is the primary place for important communications from your tutors. You will also receive announcements via your University email account.",
+		title: "<span class='circle'>3</span> Announcements",
+	  attachTo: {
+	    element: '.bd-highlight:nth-child(1)',
+	    on: 'bottom'
+	  },
+	  classes: 'example-step-extra-class',
+	  buttons: [
+			{
+	      text: "<i class='fa fa-angle-left' aria-hidden='true'></i> Back",
+	      action: tour.back
+	    },
+	    {
+	      text: "<i class='fa fa-angle-right' aria-hidden='true'></i> Next",
+	      action: tour.next
+	    }
+	  ],
+		when: {
+			show() {
+				const currentStepElement = tour.currentStep.el;
+				const footer = currentStepElement.querySelector('.shepherd-footer');
+				const progress = document.createElement('span');
+				progress.className = 'shepherd-progress';
+				progress.innerText = `${tour.steps.indexOf(tour.currentStep) + 1} of ${tour.steps.length}`;
+				footer.insertBefore(progress, currentStepElement.querySelector('.shepherd-button:last-child'));
+			}
+		},
+		scrollTo: true
+	});
+
+	tour.addStep({
+	  id: 'menubar-courseinfo',
+	  text: "This is where you will find key course information such as course lead details, handbook, reading list and timetable.",
+		title: "<span class='circle'>4</span> Course Information",
+	  attachTo: {
+	    element: '.bd-highlight:nth-child(2)',
+	    on: 'bottom'
+	  },
+	  classes: 'example-step-extra-class',
+	  buttons: [
+			{
+	      text: "<i class='fa fa-angle-left' aria-hidden='true'></i> Back",
+	      action: tour.back
+	    },
+	    {
+	      text: "<i class='fa fa-angle-right' aria-hidden='true'></i> Next",
+	      action: tour.next
+	    }
+	  ],
+		when: {
+			show() {
+				const currentStepElement = tour.currentStep.el;
+				const footer = currentStepElement.querySelector('.shepherd-footer');
+				const progress = document.createElement('span');
+				progress.className = 'shepherd-progress';
+				progress.innerText = `${tour.steps.indexOf(tour.currentStep) + 1} of ${tour.steps.length}`;
+				footer.insertBefore(progress, currentStepElement.querySelector('.shepherd-button:last-child'));
+			}
+		},
+		scrollTo: true
+	});
+
+	tour.addStep({
+	  id: 'menubar-upcoming',
+	  text: "This is where you can view future events outlined within your course(s) such as online activities or assignments.",
+		title: "<span class='circle'>5</span> Upcoming Events",
+	  attachTo: {
+	    element: '.bd-highlight:nth-child(3)',
+	    on: 'bottom'
+	  },
+	  classes: 'example-step-extra-class',
+	  buttons: [
+			{
+	      text: "<i class='fa fa-angle-left' aria-hidden='true'></i> Back",
+	      action: tour.back
+	    },
+	    {
+	      text: "<i class='fa fa-angle-right' aria-hidden='true'></i> Next",
+	      action: tour.next
+	    }
+	  ],
+		when: {
+			show() {
+				const currentStepElement = tour.currentStep.el;
+				const footer = currentStepElement.querySelector('.shepherd-footer');
+				const progress = document.createElement('span');
+				progress.className = 'shepherd-progress';
+				progress.innerText = `${tour.steps.indexOf(tour.currentStep) + 1} of ${tour.steps.length}`;
+				footer.insertBefore(progress, currentStepElement.querySelector('.shepherd-button:last-child'));
+			}
+		},
+		scrollTo: true
+	});
+
+	tour.addStep({
+	  id: 'menubar-assessment',
+	  text: "This is where you will find relevant assessment information such as submission links and extension requests.",
+		title: "<span class='circle'>6</span> Assessment",
+	  attachTo: {
+	    element: '.bd-highlight:nth-child(4)',
+	    on: 'bottom'
+	  },
+	  classes: 'example-step-extra-class',
+	  buttons: [
+			{
+	      text: "<i class='fa fa-angle-left' aria-hidden='true'></i> Back",
+	      action: tour.back
+	    },
+	    {
+	      text: "<i class='fa fa-angle-right' aria-hidden='true'></i> Next",
+	      action: tour.next
+	    }
+	  ],
+		when: {
+			show() {
+				const currentStepElement = tour.currentStep.el;
+				const footer = currentStepElement.querySelector('.shepherd-footer');
+				const progress = document.createElement('span');
+				progress.className = 'shepherd-progress';
+				progress.innerText = `${tour.steps.indexOf(tour.currentStep) + 1} of ${tour.steps.length}`;
+				footer.insertBefore(progress, currentStepElement.querySelector('.shepherd-button:last-child'));
+			}
+		},
+		scrollTo: true
+	});
+
+	tour.addStep({
+	  id: 'menubar-studytools',
+	  text: "This is where you will find study tools and resources specific to your course such as Echo and MS Teams.",
+		title: "<span class='circle'>7</span> Study Tools ",
+	  attachTo: {
+	    element: '.bd-highlight:nth-child(5)',
+	    on: 'bottom'
+	  },
+	  classes: 'example-step-extra-class',
+	  buttons: [
+			{
+	      text: "<i class='fa fa-angle-left' aria-hidden='true'></i> Back",
+	      action: tour.back
+	    },
+	    {
+	      text: "<i class='fa fa-angle-right' aria-hidden='true'></i> Next",
+	      action: tour.next
+	    }
+	  ],
+		when: {
+			show() {
+				const currentStepElement = tour.currentStep.el;
+				const footer = currentStepElement.querySelector('.shepherd-footer');
+				const progress = document.createElement('span');
+				progress.className = 'shepherd-progress';
+				progress.innerText = `${tour.steps.indexOf(tour.currentStep) + 1} of ${tour.steps.length}`;
+				footer.insertBefore(progress, currentStepElement.querySelector('.shepherd-button:last-child'));
+			}
+		},
+		scrollTo: true
+	});
+
+	tour.addStep({
+	  id: 'menubar-help',
+	  text: "This is where you can access a range of Moodle help resources.",
+		title: "<span class='circle'>8</span> Help",
+	  attachTo: {
+	    element: '.bd-highlight:nth-child(6)',
+	    on: 'bottom'
+	  },
+	  classes: 'example-step-extra-class',
+	  buttons: [
+			{
+	      text: "<i class='fa fa-angle-left' aria-hidden='true'></i> Back",
+	      action: tour.back
+	    },
+	    {
+	      text: "<i class='fa fa-angle-right' aria-hidden='true'></i> Next",
+	      action: tour.next
+	    }
+	  ],
+		when: {
+			show() {
+				const currentStepElement = tour.currentStep.el;
+				const footer = currentStepElement.querySelector('.shepherd-footer');
+				const progress = document.createElement('span');
+				progress.className = 'shepherd-progress';
+				progress.innerText = `${tour.steps.indexOf(tour.currentStep) + 1} of ${tour.steps.length}`;
+				footer.insertBefore(progress, currentStepElement.querySelector('.shepherd-button:last-child'));
+			}
+		},
+		scrollTo: true
+	});
+
+	tour.addStep({
+	  id: 'searchbar',
+	  text: "Can't find what you're looking for? Enter the name or description to find your activity or resource.",
+		title: "<span class='circle'>9</span> Course Search",
+	  attachTo: {
+	    element: '#searchSection',
+	    on: 'bottom'
+	  },
+	  classes: 'example-step-extra-class',
+	  buttons: [
+			{
+	      text: "<i class='fa fa-angle-left' aria-hidden='true'></i> Back",
+	      action: tour.back
+	    },
+	    {
+	      text: "<i class='fa fa-angle-right' aria-hidden='true'></i> Next",
+	      action: tour.next
+	    }
+	  ],
+		when: {
+			show() {
+				const currentStepElement = tour.currentStep.el;
+				const footer = currentStepElement.querySelector('.shepherd-footer');
+				const progress = document.createElement('span');
+				progress.className = 'shepherd-progress';
+				progress.innerText = `${tour.steps.indexOf(tour.currentStep) + 1} of ${tour.steps.length}`;
+				footer.insertBefore(progress, currentStepElement.querySelector('.shepherd-button:last-child'));
+			}
+		},
+		scrollTo: true
+	});
+
+	tour.addStep({
+	  id: 'sections',
+	  text: "These are your learning content sections. Open a section to find a variety of content such as lecture presentations and online activities.",
+		title: "<span class='circle'>10</span> Learning Content Sections",
+	  attachTo: {
+	    element: '#section-1',
+	    on: 'bottom'
+	  },
+	  classes: 'example-step-extra-class',
+	  buttons: [
+			{
+	      text: "<i class='fa fa-angle-left' aria-hidden='true'></i> Back",
+	      action: tour.back
+	    },
+	    {
+	      text: "<i class='fa fa-angle-right' aria-hidden='true'></i> Next",
+	      action: tour.next
+	    }
+	  ],
+		when: {
+			show() {
+				const currentStepElement = tour.currentStep.el;
+				const footer = currentStepElement.querySelector('.shepherd-footer');
+				const progress = document.createElement('span');
+				progress.className = 'shepherd-progress';
+				progress.innerText = `${tour.steps.indexOf(tour.currentStep) + 1} of ${tour.steps.length}`;
+				footer.insertBefore(progress, currentStepElement.querySelector('.shepherd-button:last-child'));
+			}
+		},
+		scrollTo: true
+	});
+
+	tour.addStep({
+	  id: 'tour-button',
+	  text: "This is the end of your course tour. You can return to this at any point in the future.",
+		title: "<span class='circle'>11</span> Course Tour",
+	  attachTo: {
+	    element: '#tourBtn',
+	    on: 'top'
+	  },
+	  classes: 'example-step-extra-class',
+	  buttons: [
+			{
+	      text: "<i class='fa fa-angle-left' aria-hidden='true'></i> Back",
+	      action: tour.back
+	    },
+			{
+				text: "<i class='fa fa-flag-checkered' aria-hidden='true'></i> Complete",
+				secondary: true,
+				action: function() {
+								window.scrollTo(0, 0);
+								console.log("Tour is now complete");
+								$('.navbar, #page-navbar').show();
+								$('body').css('background', 'transparent url(/theme/image.php/nottingham_mhs/theme/1652377230/bg) no-repeat center bottom fixed').css('background-size', 'cover');
+								tour.complete();
+							}
+			}
+	  ],
+		when: {
+			show() {
+				const currentStepElement = tour.currentStep.el;
+				const footer = currentStepElement.querySelector('.shepherd-footer');
+				const progress = document.createElement('span');
+				progress.className = 'shepherd-progress';
+				progress.innerText = `${tour.steps.indexOf(tour.currentStep) + 1} of ${tour.steps.length}`;
+				footer.insertBefore(progress, currentStepElement.querySelector('.shepherd-button:last-child'));
+			}
+		},
+		scrollTo: true
+	});
+
+	$("#tourBtn").click(function() {
+		$('.navbar, #page-navbar').hide();
+		$('body').css('background', '#696969');
+		tour.start();
+	});
+
+	['close', 'cancel'].forEach(event => tour.on(event, () => {
+		window.scrollTo(0, 0);
+		console.log("Tour is now complete");
+		$('.navbar, #page-navbar').show();
+		$('body').css('background', 'transparent url(/theme/image.php/nottingham_mhs/theme/1652377230/bg) no-repeat center bottom fixed').css('background-size', 'cover');
+		tour.complete();
+	}));
+
+});
+
 
 /*! shepherd.js 8.3.1 */
 /* https://cdn.jsdelivr.net/npm/shepherd.js@8.3.1/dist/js/shepherd.min.js */
