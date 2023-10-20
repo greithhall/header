@@ -11,3 +11,7 @@
     /* font-weight: bold !important; */
     font-size: 1.2rem;
 }
+
+.form-control {
+    padding: 1.4rem .75rem;
+}
