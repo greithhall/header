@@ -13,12 +13,12 @@ $().ready(function(){
 	// Remove 'General' as the first heading
 	// $("h3.sectionname:contains('General')").hide();
 	// Add things at the end of each section
-	$(".section ul.section").not(':first').append('<li class="activity"><div class="sectionFooter"><a href="#" title="Return to top of the course" class="btn btn-outline-primary btn-sm returnTopBtn"><i class="fa fa-chevron-circle-up"></i> Return to top of the course</a></div></li>');
+	$(".section ul.section").not(':first').append('<li class="activity"><div class="sectionFooter"><a href="#" title="Return to top of the module" class="btn btn-outline-primary btn-sm returnTopBtn"><i class="fa fa-chevron-circle-up"></i> Return to top of the module</a></div></li>');
 
 
 	// Create a search section
-	//$("#searchSection").prepend("<h5><label for='searchbox' class='control-label'>Search this course:</label></h5><div class='row justify-content-center'><input class='form-control col-sm-11' id='searchbox' placeholder='Enter a keyword to find your resources...' type='text' /><button type='button' class='btn btn-outline-primary' id='clearBtn'><i class='fa fa-times' aria-hidden='true'></i> Clear</button></div><div class='row justify-content-center'><span id='counter'></span></div>");
-	$("#searchSection").prepend("<h5><label for='searchbox' class='control-label'>Search this course:</label></h5><div class='input-group mb-3'><input type='text' id='searchbox' class='form-control' placeholder='Enter a keyword to find your resources...' aria-label='Search this course' aria-describedby='clearBtn'><div class='input-group-append'><button class='btn btn-outline-secondary' type='button' id='clearBtn'>&times; Clear</button></div></div><div class='row justify-content-center'><span id='counter'></span></div>");
+	//$("#searchSection").prepend("<h5><label for='searchbox' class='control-label'>Search this module:</label></h5><div class='row justify-content-center'><input class='form-control col-sm-11' id='searchbox' placeholder='Enter a keyword to filter the module content...' type='text' /><button type='button' class='btn btn-outline-primary' id='clearBtn'><i class='fa fa-times' aria-hidden='true'></i> Clear</button></div><div class='row justify-content-center'><span id='counter'></span></div>");
+	$("#searchSection").prepend("<h5><label for='searchbox' class='control-label'>Search this module:</label></h5><div class='input-group mb-3'><input type='text' id='searchbox' class='form-control' placeholder='Enter a keyword to filter the module content...' aria-label='Filter Module Content' aria-describedby='clearBtn'><div class='input-group-append'><button class='btn btn-outline-secondary' type='button' id='clearBtn'>&times; Clear</button></div></div><div class='row justify-content-center'><span id='counter'></span></div>");
 
 	//$(".sectionbody ul").before("<div class='progress'><div class='progress-bar' role='progressbar' style='width: 25%;' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100'>25%</div></div>");
 	//$(".sectionbody ul").before("<div id='progressChart'></div>");
