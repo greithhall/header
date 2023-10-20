@@ -15,3 +15,22 @@
 .form-control {
     padding: 1.4rem .75rem;
 }
+
+.sectionFooter {
+	border-top: 1px solid #EEE !important;
+	margin-top: 50px !important;
+	text-align: center !important;
+	margin-bottom: 25px !important;
+}
+
+.returnTopBtn {
+	margin-top: 10px !important;
+}
+
+.highlight {
+	/*border: 2px solid #B32B76;*/
+	padding: 5px !important;
+	margin-bottom: 10px !important;
+	background-color: #bee3db !important;
+	color: #000 !important;
+}
