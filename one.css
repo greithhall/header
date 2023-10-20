@@ -1,14 +1,9 @@
 #searchSection {
-	/*border: 1px solid #ccc;*/
-	padding: 20px 20px 40px 20px !important;
-	/*margin-top: 20px !important;*/
-	background-color: #EEE !important;
-	border-radius: 10px !important;
+	padding: 10px 10px 40px 10px !important;
 }
 
 #counter {
     text-align: center !important;
-    /* font-weight: bold !important; */
     font-size: 1.2rem;
 }
 
@@ -28,7 +23,6 @@
 }
 
 .highlight {
-	/*border: 2px solid #B32B76;*/
 	padding: 5px !important;
 	margin-bottom: 10px !important;
 	background-color: #bee3db !important;
