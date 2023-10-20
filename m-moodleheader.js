@@ -23,72 +23,7 @@ $().ready(function(){
 	//$(".sectionbody ul").before("<div class='progress'><div class='progress-bar' role='progressbar' style='width: 25%;' aria-valuenow='25' aria-valuemin='0' aria-valuemax='100'>25%</div></div>");
 	//$(".sectionbody ul").before("<div id='progressChart'></div>");
 
-	// START: Add a custom 'tag' for the type of activity following its name
-	$(".activityinstance img[src*='document']").parent().after("<span class='activityType word'>DOCUMENT</span>");
-	$(".activityinstance img[src*='pdf']").parent().after("<span class='activityType pdf'>DOCUMENT</span>");
-	$(".activityinstance img[src*='jpeg']").parent().after("<span class='activityType'>IMAGE</span>");
-	$(".activityinstance img[src$='png-24']").parent().after("<span class='activityType'>IMAGE</span>");
-	$(".activityinstance img[src$='gif-24']").parent().after("<span class='activityType'>IMAGE</span>");
-	$(".activityinstance img[src$='html-24']").parent().after("<span class='activityType'>ONLINE ACTIVITY</span>");
-	$(".activityinstance img[src*='powerpoint']").parent().after("<span class='activityType presentation'>PRESENTATION</span>");
-	$(".activityinstance img[src$='engageicon.png']").parent().after("<span class='activityType'>RECORDING</span>");
-	$(".activityinstance img[src$='r_logo.gif']").parent().after("<span class='activityType'>EXAMSYS</span>");
-	$(".activityinstance img[src*='spreadsheet']").parent().after("<span class='activityType'>SPREADSHEET</span>");
-	$(".activityinstance img[src*='assign']").parent().after("<span class='activityType'>ASSIGNMENT</span>");
-	// The following are all considered as 'ONLINE ACTIVITIES'
-	$(".activityinstance img[src*='book']").parent().after("<span class='activityType'>ONLINE ACTIVITY</span>");
-	$(".activityinstance img[src*='chat']").parent().after("<span class='activityType'>ONLINE ACTIVITY</span>");
-	$(".activityinstance img[src*='choice']").parent().after("<span class='activityType'>ONLINE ACTIVITY</span>");
-	$(".activityinstance img[src*='data']").parent().after("<span class='activityType'>ONLINE ACTIVITY</span>");
-	$(".activityinstance img[src*='feedback']").parent().after("<span class='activityType'>ONLINE ACTIVITY</span>");
-	$(".activityinstance:not(:first) img[src*='forum']").parent().after("<span class='activityType'>ONLINE ACTIVITY</span>");
-	$(".activityinstance img[src*='glossary']").parent().after("<span class='activityType'>ONLINE ACTIVITY</span>");
-	$(".activityinstance img[src*='h5pactivity']").parent().after("<span class='activityType'>ONLINE ACTIVITY</span>");
-	$(".activityinstance img[src*='imscp']").parent().after("<span class='activityType'>ONLINE ACTIVITY</span>");
-	$(".activityinstance img[src*='kalvidres']").parent().after("<span class='activityType'>ONLINE ACTIVITY</span>");
-	$(".activityinstance img[src*='lesson']").parent().after("<span class='activityType'>ONLINE ACTIVITY</span>");
-	$(".activityinstance img[src*='quiz']").parent().after("<span class='activityType'>ONLINE ACTIVITY</span>");
-	$(".activityinstance img[src*='scorm']").parent().after("<span class='activityType'>ONLINE ACTIVITY</span>");
-	$(".activityinstance img[src*='survey']").parent().after("<span class='activityType'>ONLINE ACTIVITY</span>");
-	$(".activityinstance img[src*='vote']").parent().after("<span class='activityType'>ONLINE ACTIVITY</span>");
-	$(".activityinstance img[src*='wiki']").parent().after("<span class='activityType'>ONLINE ACTIVITY</span>");
-	$(".activityinstance img[src*='workshop']").parent().after("<span class='activityType'>ONLINE ACTIVITY</span>");
 
-	// Append a 'VIDEO' tag to items considered video
-	$(".activity:contains('ctivity') .activityinstance img[src*='url']").parent().after("<span class='activityType'>ONLINE ACTIVITY</span>");
-	//$(".activity:contains('rlo') .activityinstance img[src*='url'], .activity:contains('RLO') .activityinstance img[src*='url']").parent().after("<span class='activityType'>ONLINE ACTIVITY</span>");
-
-	// Append an 'AUDIO' tag to items considered audio
-	$(".activity:contains('udio') .activityinstance img[src*='url']").parent().after("<span class='activityType'>AUDIO</span>");
-	// Append a 'VIDEO' tag to items considered video
-	$(".activity:contains('ideo') .activityinstance img[src*='url']").parent().after("<span class='activityType'>VIDEO</span>");
-	// Append an 'ARTICLE' tag to items considered an article
-	$(".activity:contains('rticle') .activityinstance img[src*='url'], .activity:contains('ournal') .activityinstance img[src*='url']").parent().after("<span class='activityType'>ARTICLE</span>");
-	// Append a 'WEBSITE' tag to items considered a website
-	$(".activity:contains('ebsite') .activityinstance img[src*='url']").parent().after("<span class='activityType'>WEBSITE</span>");
-
-	/*
-	$(".activityinstance img[src*='mp3']").parent().after("<span class='activityType'>AUDIO</span>");
-	$(".activityinstance img[src*='wav']").parent().after("<span class='activityType'>AUDIO</span>");
-	$(".activityinstance img[src*='mpeg']").parent().after("<span class='activityType'>VIDEO</span>");
-	$(".activityinstance img[src*='url']").parent().after("<span class='activityType'>WEBSITE</span>");
-	$(".activityinstance:contains('udio'), .activityinstance:contains('soundtrack'), .activityinstance:contains('mp3'), .activityinstance:contains('MP3')").parent().after("<span class='activityType'>AUDIO</span>");
-	$(".activityinstance:contains('ideo')").parent().after("<span class='activityType'>VIDEO</span>");
-	$(".activity:contains('ournal'), .activityinstance:contains('rticle')").append("<span class='activityType'>ARTICLE</span>");
-	//$(".activity:contains('ideo'), .activityinstance:contains('film'), .activityinstance:contains('clip')").append("<span class='activityType'>VIDEO</span>");*/
-
-	// Append 'MS TEAMS' tag and icon to items representing MS Teams
-	$(".activityinstance:contains('MS Teams'), .activityinstance:contains('Microsoft Teams')").append("<span class='activityType teams'>MS TEAMS</span>");
-	$(".activity:contains('MS Teams'), .activity:contains('Microsoft Teams')").each(function() {
-		$(this).find('img:first').replaceWith('<img src="https://www.nottingham.ac.uk/healthsciences/app-resources/vle-resources/images/moodle-colour-teams-logo.png" alt="Microsoft Teams Meeting" class="iconlarge activityicon" />');
-	});
-
-
-	/* RUBRICS
-	$(".activity:contains('.rbc'), .activityinstance:contains('.rbc'), .activityinstance:contains('ubric')").append("<span class='activityType'>RUBRIC</span>");
-	...*/
-
-	// END: Add a custom 'tag' for the type of activity following its name
 
 
 
