@@ -11,7 +11,7 @@ $().ready(function(){
 // ===== START: Small UI tweaks =====
 
 	// Remove 'General' as the first heading
-	$("h3.sectionname:contains('General')").hide();
+	// $("h3.sectionname:contains('General')").hide();
 	// Add things at the end of each section
 	$(".section ul.section").not(':first').append('<li class="activity"><div class="sectionFooter"><a href="#" title="Return to top of the course" class="btn btn-outline-primary btn-sm returnTopBtn"><i class="fa fa-chevron-circle-up"></i> Return to top of the course</a></div></li>');
 
