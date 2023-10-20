@@ -120,7 +120,66 @@ item.style.display = item.textContent.includes(liveSearch.target.value)
 // ===== END: Create and display search function =====
 
 
+// ===== START: Events to open and close sections/topics =====
 
+// Actions for clicking on the Assessment button
+$("#assessmentBtn").click(function(){
+	// Open only the Assessment section
+	$('.sectionhead:contains("Assessment")').next().addClass("sectionopen");
+	$('.sectionhead:contains("Assessment")').next().next().addClass("sectionopen");
+	$('.sectionhead:contains("Assessment") span').removeClass("toggle_closed").addClass("toggle_open");
+
+		$('html, body').animate({
+			scrollTop: $('.sectionhead:contains("Assessment")').offset().top
+		}, 800);
+});
+
+// Actions for clicking on the Your Feedback button
+$("#feedbackBtn").click(function(){
+	$("#feedbackModal").modal();
+});
+
+// Actions for clicking on the Upcoming button
+$("#upcomingBtn").click(function(){
+	$("#upcomingModal").modal();
+});
+
+$("#upcomingCourse").click(function(){
+	// Open the calendar for the specific course
+	let currentURL = window.location.href;
+	var courseID = currentURL.split('id=')[1].replace(/\D/g, '');
+		//console.log("Course ID is: " + currentURL.split('id=')[1].replace(/\D/g, ''));
+		//console.log('https://moodle.nottingham.ac.uk/calendar/view.php?view=month&course=' + courseID);
+	// Redirect to calendar with the course code in the URL
+	window.location.href = 'https://moodle.nottingham.ac.uk/calendar/view.php?view=month&course=' + courseID;
+});
+
+$("#upcomingAll").click(function(){
+	// Open the calendar for all courses in month view
+	let url = 'https://moodle.nottingham.ac.uk/calendar/view.php?view=month';
+	window.open(url, '_blank').focus();
+});
+
+function openAllSections() {
+	// Open all collapsed topic sections
+	$("[id^=toggledsection-]").addClass("sectionopen");
+}
+
+function closeAllSections() {
+	// Close all collapsed topic sections
+	$("[id^=toggledsection-]").removeClass("sectionopen");
+}
+
+function hideTourBtn() {
+	$("#tourBtn").css("display", "none !important");
+}
+
+// ===== START: Events to open and close sections/topics =====
+
+
+
+
+});
 
 
 /*! shepherd.js 8.3.1 */
